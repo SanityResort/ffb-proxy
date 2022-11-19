@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<admin>
+    <cache size="3" activeGames="0">
+        <game id="1459" name="">
+            <status>scheduled</status>
+            <teamHome>CJ Test Darkies</teamHome>
+            <teamAway>CJ-Test Gobbos</teamAway>
+            <connections players="1" spectators="0"/>
+        </game>
+        <game id="1460" name="fooo">
+            <status>starting</status>
+            <teamHome>Test Div Dorfs CJ</teamHome>
+            <teamAway/>
+            <connections players="1" spectators="0"/>
+        </game>
+        <game id="1461">
+            <status>starting</status>
+            <teamHome>Test Div Girls CJ</teamHome>
+            <teamAway/>
+            <connections players="1" spectators="0"/>
+        </game>
+    </cache>
+    <status>ok</status>
+</admin>
