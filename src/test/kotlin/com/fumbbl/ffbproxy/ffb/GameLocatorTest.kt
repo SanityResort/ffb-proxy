@@ -1,29 +1,34 @@
 package com.fumbbl.ffbproxy.ffb
 
-import org.junit.jupiter.api.Assertions.*
+import io.mockk.mockk
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.fail
+import java.net.URL
 
 internal class GameLocatorTest {
 
+    val gameLocator = GameLocator()
+    val ffbConnection: FfbConnection = mockk()
+
     @Test
     fun hasGameWithId() {
-        fail("Not implemented")
+        assertTrue(gameLocator.hasGame(1459, ffbConnection));
     }
 
     @Test
     fun hasGameWithName() {
-        fail("Not implemented")
+        assertTrue(gameLocator.hasGame("foo", ffbConnection));
     }
 
     @Test
     fun hasNoGameWithId() {
-        fail("Not implemented")
+        assertFalse(gameLocator.hasGame(1, ffbConnection));
     }
 
     @Test
     fun hasNoGameWithName() {
-        fail("Not implemented")
+        assertFalse(gameLocator.hasGame("bar", ffbConnection));
     }
 
 
