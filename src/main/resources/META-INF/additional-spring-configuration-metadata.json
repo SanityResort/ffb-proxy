@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "ffb.timeout",
+      "type": "java.lang.Integer",
+      "description": "Timeout for connections to the ffb backends"
+  }
+] }

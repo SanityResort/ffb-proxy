@@ -7,7 +7,7 @@
             <teamAway>CJ-Test Gobbos</teamAway>
             <connections players="1" spectators="0"/>
         </game>
-        <game id="1460" name="fooo">
+        <game id="1460" name="foo">
             <status>starting</status>
             <teamHome>Test Div Dorfs CJ</teamHome>
             <teamAway/>
