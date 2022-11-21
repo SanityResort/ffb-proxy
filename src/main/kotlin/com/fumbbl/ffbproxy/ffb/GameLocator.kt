@@ -15,7 +15,7 @@ class GameLocator(private val jsoupConnection: Connection) {
     }
 
     private fun containsAttributeValue(ffb: FfbConnection, name: String, value: String): Boolean {
-        return jsoupConnection.newRequest().url(ffb.url).get().select("game").stream()
+        return jsoupConnection.newRequest().url(ffb.cacheUrl).get().select("game").stream()
             .map { element -> element.attr(name) }.anyMatch { attrValue -> attrValue.equals(value) }
     }
 }
