@@ -2,4 +2,4 @@ package com.fumbbl.ffbproxy.ffb
 
 import java.net.URL
 
-data class FfbConnection(val name: String, val cacheUrl: URL)
+data class FfbConnection(val name: String, val cacheUrl: URL, val jnlpUrl: URL)

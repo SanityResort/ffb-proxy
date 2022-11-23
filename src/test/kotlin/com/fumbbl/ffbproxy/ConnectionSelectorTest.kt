@@ -1,5 +1,6 @@
 package com.fumbbl.ffbproxy
 
+import com.fumbbl.ffbproxy.config.Connections
 import com.fumbbl.ffbproxy.ffb.FfbConnection
 import com.fumbbl.ffbproxy.ffb.GameLocator
 import io.mockk.every
@@ -15,16 +16,10 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(MockKExtension::class)
 internal class ConnectionSelectorTest {
 
-    private val PRIMARY = "primary"
     private val FIRST = "first"
     private val SECOND = "second"
 
     private lateinit var selector: ConnectionSelector
-
-    private lateinit var config: ConnectionConfig
-
-    @MockK
-    private lateinit var primary: FfbConnection
 
     @MockK
     private lateinit var firstNode: FfbConnection
@@ -32,16 +27,21 @@ internal class ConnectionSelectorTest {
     @MockK
     private lateinit var secondNode: FfbConnection
 
+    @MockK
+    private lateinit var config: Connections
+
     @RelaxedMockK
     private lateinit var locator: GameLocator
 
     @BeforeEach
     fun setup() {
-        every { primary.name } returns PRIMARY
         every { firstNode.name } returns FIRST
         every { secondNode.name } returns SECOND
 
-        config = ConnectionConfig(primary, emptyList(), listOf(firstNode, secondNode))
+        every { config.availableConnections } returns listOf(firstNode, secondNode)
+        every { config.activeConnections } returns listOf(FIRST, SECOND)
+        every { config.primary } returns secondNode
+        every { config.primaryName } returns SECOND
 
         selector = ConnectionSelector(locator, config)
     }
@@ -60,7 +60,7 @@ internal class ConnectionSelectorTest {
 
     @Test
     fun selectPrimaryIfIdIsNotFound() {
-        assertSame(primary, selector.select(1))
+        assertSame(secondNode, selector.select(1))
     }
 
     @Test
@@ -77,6 +77,6 @@ internal class ConnectionSelectorTest {
 
     @Test
     fun selectPrimaryIfNameIsNotFound() {
-        assertSame(primary, selector.select(""))
+        assertSame(secondNode, selector.select(""))
     }
 }

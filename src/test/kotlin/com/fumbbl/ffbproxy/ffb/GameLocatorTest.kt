@@ -17,9 +17,6 @@ import java.nio.charset.StandardCharsets
 @ExtendWith(MockKExtension::class)
 internal class GameLocatorTest {
 
-    private val ffbUrl = URL("https://localhost")
-
-    private val ffbConnection = FfbConnection("name", ffbUrl)
 
     private lateinit var gameLocator: GameLocator
 
@@ -34,6 +31,14 @@ internal class GameLocatorTest {
 
     private lateinit var document: Document
 
+    @MockK
+    private lateinit var jnlpUrl: URL
+
+    private val ffbUrl = URL("https://localhost")
+
+    private lateinit var ffbConnection: FfbConnection
+
+
     @BeforeEach
     fun setup() {
         document = Jsoup.parse(Thread.currentThread().contextClassLoader.getResourceAsStream("gameCache.xml")!!, StandardCharsets.UTF_8.toString(), "")
@@ -41,6 +46,7 @@ internal class GameLocatorTest {
         every { newRequest.url(ffbUrl) } returns url
         every { url.get() } returns document
 
+        ffbConnection = FfbConnection("name", ffbUrl, jnlpUrl)
         gameLocator = GameLocator(jsoupConnection)
     }
 

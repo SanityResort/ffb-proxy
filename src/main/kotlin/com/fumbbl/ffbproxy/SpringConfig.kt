@@ -1,12 +1,11 @@
 package com.fumbbl.ffbproxy
 
-import com.fumbbl.ffbproxy.ffb.FfbConnection
+import com.fumbbl.ffbproxy.config.*
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import java.net.URL
 
 @Configuration
 class SpringConfig {
@@ -17,11 +16,5 @@ class SpringConfig {
     @Bean
     fun jsoupConnection(): Connection {
         return Jsoup.newSession().timeout(timeout).userAgent("FFB Proxy")
-    }
-
-    @Bean
-    fun connectionConfig(): ConnectionConfig {
-        //TODO build config
-        return ConnectionConfig(FfbConnection("", URL("")), emptyList(), emptyList())
     }
 }
