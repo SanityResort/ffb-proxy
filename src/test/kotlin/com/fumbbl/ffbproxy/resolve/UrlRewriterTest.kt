@@ -44,4 +44,30 @@ internal class UrlRewriterTest {
         assertEquals(URL("https://redirectHost:8080/servletPath"),
             urlRewriter().buildFfbUrl(originalUrl, ffbConnection))
     }
+
+    @Test
+    fun buildJnlpUrl() {
+        every { ffbConnection.jnlpUrl } returns URL("https://redirectHost:8081/basePath")
+        assertEquals(URL("https://redirectHost:8081/basePath/servletPath"), urlRewriter().buildJnlpUrl(originalUrl, ffbConnection))
+    }
+
+    @Test
+    fun buildJnlpUrlWithoutBasePath() {
+        every { ffbConnection.jnlpUrl } returns URL("https://redirectHost:8081")
+        assertEquals(URL("https://redirectHost:8081/servletPath"), urlRewriter().buildJnlpUrl(originalUrl, ffbConnection))
+    }
+
+    @Test
+    fun buildJnlpUrlWithQueries() {
+        every { ffbConnection.jnlpUrl } returns URL("https://redirectHost:8081/basePath?base=value1")
+        assertEquals(URL("https://redirectHost:8081/basePath/servletPath?base=value1&orignal=value2"),
+            urlRewriter().buildJnlpUrl(URL("http://orignalHost:8080/servletPath?orignal=value2"), ffbConnection))
+    }
+
+    @Test
+    fun buildJnlpUrlFromDomainOnly() {
+        every { ffbConnection.jnlpUrl } returns URL("https://redirectHost")
+        assertEquals(URL("https://redirectHost:8080/servletPath"),
+            urlRewriter().buildJnlpUrl(originalUrl, ffbConnection))
+    }
 }

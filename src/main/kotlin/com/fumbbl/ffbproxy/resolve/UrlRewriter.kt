@@ -9,13 +9,21 @@ import java.net.URL
 class UrlRewriter {
 
     fun buildFfbUrl(originalUrl: URL, ffbConnection: FfbConnection): URL {
+        return buildUrl(originalUrl, ffbConnection.apiBaseUrl)
+    }
 
-        val scheme = ffbConnection.apiBaseUrl.protocol.ifBlank { originalUrl.protocol }
-        val host = ffbConnection.apiBaseUrl.host.ifBlank { originalUrl.host }
-        val port = if (ffbConnection.apiBaseUrl.port > 0) ffbConnection.apiBaseUrl.port else originalUrl.port
-        val path = ffbConnection.apiBaseUrl.path + originalUrl.path
+    fun buildJnlpUrl(originalUrl: URL, ffbConnection: FfbConnection): URL {
+        return buildUrl(originalUrl, ffbConnection.jnlpUrl)
+    }
+
+    private fun buildUrl(originalUrl: URL, baseUrl: URL): URL {
+
+        val scheme = baseUrl.protocol.ifBlank { originalUrl.protocol }
+        val host = baseUrl.host.ifBlank { originalUrl.host }
+        val port = if (baseUrl.port > 0) baseUrl.port else originalUrl.port
+        val path = baseUrl.path + originalUrl.path
         val query =
-            if (ffbConnection.apiBaseUrl.query == null || ffbConnection.apiBaseUrl.query.isBlank()) originalUrl.query else ffbConnection.apiBaseUrl.query + "&" + originalUrl.query
+            if (baseUrl.query == null || baseUrl.query.isBlank()) originalUrl.query else baseUrl.query + "&" + originalUrl.query
 
         return UriComponentsBuilder.newInstance()
             .scheme(scheme)
@@ -25,5 +33,4 @@ class UrlRewriter {
             .query(query)
             .build().toUri().toURL()
     }
-
 }
