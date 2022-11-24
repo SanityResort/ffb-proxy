@@ -9,11 +9,16 @@ import java.net.URL
 import javax.servlet.http.HttpServletRequest
 
 @Controller
-class Controller(val rewriter: UrlRewriter, val connections: Connections) {
+class RedirectController(val rewriter: UrlRewriter, val connections: Connections) {
 
     @RequestMapping("/public/jnlp")
     fun jnlp(request: HttpServletRequest): RedirectView {
         return RedirectView(rewriter.buildJnlpUrl(requestUrl(request), connections.getPrimary(), "/public/jnlp").toString())
+    }
+
+    @RequestMapping("/ffb/**")
+    fun ffb(request: HttpServletRequest): RedirectView {
+        return RedirectView(rewriter.buildFfbUrl(requestUrl(request), connections.getPrimary(), "/ffb").toString())
     }
 
     private fun requestUrl(request: HttpServletRequest): URL {
@@ -23,10 +28,5 @@ class Controller(val rewriter: UrlRewriter, val connections: Connections) {
         }
         return URL(urlString)
 
-    }
-
-    @RequestMapping("/ffb/**")
-    fun ffb(request: HttpServletRequest): RedirectView {
-        return RedirectView(rewriter.buildFfbUrl(requestUrl(request), connections.getPrimary(), "/ffb").toString())
     }
 }

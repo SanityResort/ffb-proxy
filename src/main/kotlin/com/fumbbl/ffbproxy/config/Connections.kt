@@ -36,5 +36,5 @@ class Connections(var availableConnections: List<FfbConnection>, primaryName: St
             .orElseThrow { IllegalArgumentException("Primary does not refer to an available connection") }
     //        activeConnections = activeConnections.plus(primary.name) // disabled test exists
     }
-
 }
+

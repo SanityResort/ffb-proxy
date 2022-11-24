@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
 @AutoConfigureMockMvc
-internal class ControllerTest {
+internal class RedirectControllerTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
