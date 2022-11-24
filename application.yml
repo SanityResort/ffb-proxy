@@ -1,9 +1,9 @@
 ffb:
   availableConnections:
     - name: conn1
-      cacheUrl: http://localhost:22228/cache1
+      apiBaseUrl: http://localhost:22228
       jnlpUrl: http://localhost:22228/jnlp1
     - name: conn2
-      cacheUrl: http://localhost:22228/cache2
+      apiBaseUrl: http://localhost:22228
       jnlpUrl: http://localhost:22228/jnlp2
   primaryName: conn2
