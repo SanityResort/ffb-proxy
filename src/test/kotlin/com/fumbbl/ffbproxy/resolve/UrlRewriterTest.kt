@@ -13,34 +13,35 @@ import java.net.URL
 @ExtendWith(MockKExtension::class)
 internal class UrlRewriterTest {
 
-    private val originalUrl = URL("http://orignalHost:8080/servletPath")
+    private fun urlRewriter() = UrlRewriter()
 
+    private val originalUrl = URL("http://orignalHost:8080/servletPath")
     @MockK
     private lateinit var ffbConnection: FfbConnection
 
     @Test
     fun buildFfbUrl() {
         every { ffbConnection.apiBaseUrl } returns URL("https://redirectHost:8081/basePath")
-        assertEquals(URL("https://redirectHost:8081/basePath/servletPath"), UrlRewriter().buildFfbUrl(originalUrl, ffbConnection))
+        assertEquals(URL("https://redirectHost:8081/basePath/servletPath"), urlRewriter().buildFfbUrl(originalUrl, ffbConnection))
     }
 
     @Test
     fun buildFfbUrlWithoutBasePath() {
         every { ffbConnection.apiBaseUrl } returns URL("https://redirectHost:8081")
-        assertEquals(URL("https://redirectHost:8081/servletPath"), UrlRewriter().buildFfbUrl(originalUrl, ffbConnection))
+        assertEquals(URL("https://redirectHost:8081/servletPath"), urlRewriter().buildFfbUrl(originalUrl, ffbConnection))
     }
 
     @Test
     fun buildFfbUrlWithQueries() {
         every { ffbConnection.apiBaseUrl } returns URL("https://redirectHost:8081/basePath?base=value1")
         assertEquals(URL("https://redirectHost:8081/basePath/servletPath?base=value1&orignal=value2"),
-            UrlRewriter().buildFfbUrl(URL("http://orignalHost:8080/servletPath?orignal=value2"), ffbConnection))
+            urlRewriter().buildFfbUrl(URL("http://orignalHost:8080/servletPath?orignal=value2"), ffbConnection))
     }
 
     @Test
     fun buildFfbUrlFromDomainOnly() {
         every { ffbConnection.apiBaseUrl } returns URL("https://redirectHost")
         assertEquals(URL("https://redirectHost:8080/servletPath"),
-            UrlRewriter().buildFfbUrl(originalUrl, ffbConnection))
+            urlRewriter().buildFfbUrl(originalUrl, ffbConnection))
     }
 }
