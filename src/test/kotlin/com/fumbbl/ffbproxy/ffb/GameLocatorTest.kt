@@ -35,6 +35,7 @@ internal class GameLocatorTest {
     private lateinit var jnlpUrl: URL
 
     private val ffbUrl = URL("https://localhost")
+    private val cacheUrl = URL("https://localhost/admin/cache")
 
     private lateinit var ffbConnection: FfbConnection
 
@@ -43,7 +44,7 @@ internal class GameLocatorTest {
     fun setup() {
         document = Jsoup.parse(Thread.currentThread().contextClassLoader.getResourceAsStream("gameCache.xml")!!, StandardCharsets.UTF_8.toString(), "")
         every { jsoupConnection.newRequest() } returns newRequest
-        every { newRequest.url(ffbUrl) } returns url
+        every { newRequest.url(cacheUrl) } returns url
         every { url.get() } returns document
 
         ffbConnection = FfbConnection("name", ffbUrl, jnlpUrl)
