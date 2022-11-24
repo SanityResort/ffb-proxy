@@ -18,7 +18,7 @@ class ConnectionSelector(private val locator: GameLocator, private val config: C
 
     private fun select(predicate: (FfbConnection) -> Boolean): FfbConnection {
         return config.availableConnections.stream().filter { connection -> config.activeConnections.contains(connection.name)}.filter(predicate).findFirst()
-            .orElse(config.primary)
+            .orElse(config.getPrimary())
     }
 
 }

@@ -39,8 +39,8 @@ internal class ConnectionSelectorTest {
         every { secondNode.name } returns SECOND
 
         every { config.availableConnections } returns listOf(firstNode, secondNode)
-        every { config.activeConnections } returns listOf(FIRST, SECOND)
-        every { config.primary } returns secondNode
+        every { config.activeConnections } returns setOf(FIRST, SECOND)
+        every { config.getPrimary() } returns secondNode
         every { config.primaryName } returns SECOND
 
         selector = ConnectionSelector(locator, config)

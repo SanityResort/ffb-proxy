@@ -1,9 +1,9 @@
 ffb:
   availableConnections:
     - name: conn1
-      apiBaseUrl: http://localhost:22228
-      jnlpUrl: http://localhost:22228/jnlp1
+      apiBaseUrl: http://localhost:22226
+      jnlpUrl: http://localhost:22227/jnlp1
     - name: conn2
       apiBaseUrl: http://localhost:22228
-      jnlpUrl: http://localhost:22228/jnlp2
+      jnlpUrl: http://localhost:22229/jnlp2
   primaryName: conn2
