@@ -3,6 +3,11 @@
     {
       "name": "ffb.timeout",
       "type": "java.lang.Integer",
-      "description": "Timeout for connections to the ffb backends"
-  }
-] }
+      "description": "Timeout for connections to the ffb backends."
+    },
+    {
+      "name": "server.publicPort",
+      "type": "java.lang.String",
+      "description": "Server port for public endpoints."
+    }
+  ] }
