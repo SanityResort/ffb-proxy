@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.fumbbl</groupId>
 	<artifactId>ffb-proxy</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>ffb-proxy</name>
 	<description>Proxy for Fumbbl&apos;s FFB</description>
@@ -110,7 +110,6 @@
 					</args>
 					<compilerPlugins>
 						<plugin>spring</plugin>
-						<plugin>jpa</plugin>
 					</compilerPlugins>
 				</configuration>
 				<dependencies>
