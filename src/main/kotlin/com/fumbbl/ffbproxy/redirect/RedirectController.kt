@@ -23,7 +23,7 @@ class RedirectController(val rewriter: UrlRewriter, val connections: Connections
 
     private fun requestUrl(request: HttpServletRequest): URL {
         var urlString = request.requestURL.toString()
-        if (request.queryString.isNotBlank()) {
+        if (request.queryString != null && request.queryString.isNotBlank()) {
             urlString += "?" + request.queryString
         }
         return URL(urlString)

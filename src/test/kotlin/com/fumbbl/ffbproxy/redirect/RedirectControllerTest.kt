@@ -32,4 +32,18 @@ internal class RedirectControllerTest {
             .andExpect(MockMvcResultMatchers.status().isFound)
             .andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost:22228/servlet/path?id=12345"))
     }
+
+    @Test
+    fun jnlpNoQuery() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/public/jnlp"))
+            .andExpect(MockMvcResultMatchers.status().isFound)
+            .andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost:22229/jnlp2"))
+    }
+
+    @Test
+    fun ffbNoQuery() {
+        mockMvc.perform(MockMvcRequestBuilders.get("/ffb/servlet/path"))
+            .andExpect(MockMvcResultMatchers.status().isFound)
+            .andExpect(MockMvcResultMatchers.header().string("Location", "http://localhost:22228/servlet/path"))
+    }
 }
